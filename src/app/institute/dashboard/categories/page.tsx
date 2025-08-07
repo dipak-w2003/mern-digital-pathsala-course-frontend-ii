@@ -1,4 +1,5 @@
 "use client"
+import Modal from '@/lib/components/Modal/Modal'
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks'
 import { ICategoryData } from '@/lib/store/institute/category/category.type'
 import { deleteCategory, fetchCategories } from '@/lib/store/institute/category/categorySlice'
@@ -25,7 +26,9 @@ function InstituteCategories() {
   return (
     <div className="flex flex-col">
       <div className=" overflow-x-auto">
-        {}
+        {
+          isModalOpen && <Modal closeModal={closeModal} />
+        }
         <div className="min-w-full inline-block align-middle">
           <div className="flex justify-between">
             <div className="relative  text-gray-500 focus-within:text-gray-900 mb-4">
@@ -58,7 +61,7 @@ function InstituteCategories() {
             <tbody className="divide-y divide-gray-300 ">
               {filteredData.length > 0 && filteredData.map((category: ICategoryData) => {
                 return (
-                  <tr key={category?.id} className="bg-white transition-all duration-500 hover:bg-gray-50">
+                  <tr key={category?.id + " " + category?.categoryName} className="bg-white transition-all duration-500 hover:bg-gray-50">
                     <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 "> {category?.id}</td>
                     <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900"> {category?.categoryName} </td>
                     <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900"> {category?.categoryDescription?.substring(0, 50)}</td>
