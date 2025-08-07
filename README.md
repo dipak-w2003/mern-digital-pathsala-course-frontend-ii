@@ -1,5 +1,5 @@
 # Digital Pathsala Project 2 : Frontend (NextJS)
-
+somechanges
 For Frontend we will be using NextJS
 
 ## Table Contents
