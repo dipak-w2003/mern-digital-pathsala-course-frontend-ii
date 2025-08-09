@@ -1,22 +1,27 @@
 import { Status } from "@/lib/types/type";
 
-export interface IInstituteCourseInitialDataCourse {
-  courseName: string;
-  coursePrice: string;
-  id: string;
+interface IInstituteCourseInitialDataCourse {
+  courseName: string,
+  coursePrice: string,
+  courseDescription:string,
+  createdAt:Date,
+  id: string
 }
 
 export interface IInstituteCourseInitialData {
-  status: Status;
-  courses: IInstituteCourseInitialDataCourse[];
+  status: Status,
+  courses: IInstituteCourseInitialDataCourse[]
 }
-export const initialCourseState: IInstituteCourseInitialData = {
-  courses: [
-    {
-      courseName: "Node JS",
-      coursePrice: "999",
-      id: "1",
-    },
-  ],
-  status: Status.LOADING,
-};
+
+
+export interface ICoursePostData {
+  courseName: string,
+  courseDescription: string,
+  coursePrice: string,
+  courseDuration: string,
+  courseThumbnail: File | null,
+  categoryId: string,
+  courseLevel: string
+}
+
+

@@ -11,7 +11,6 @@ interface IInstituteTeacherInitialDataTeacherCourse {
   coursePrice: string;
   courseThumbnail: string;
 }
-
 export interface IInstituteTeacherInitialDataTeacher {
   teacherName: string | null;
   teacherEmail: string | null;
@@ -28,20 +27,10 @@ export interface IInitialTeacherDataWithCourse
 }
 
 export interface IInstituteTeacherInitialData {
-  teacher: IInitialTeacherDataWithCourse;
+  teachers: IInstituteTeacherInitialDataTeacher[];
   status: Status;
 }
-export const initialIInstituteTeacherInitialDataTeacherState: IInstituteTeacherInitialData =
-  {
-    teacher: {
-      teacherName: "",
-      teacherEmail: "",
-      joinedDate: "",
-      teacherPhoneNumber: "",
-      teacherSalary: "",
-      teacherPhoto: "",
-      teacherExpertise: TeacherExpertise.Beginner,
-      course: { courseName: "", coursePrice: "", courseThumbnail: "" },
-    },
-    status: Status.LOADING,
-  };
+export const iInstituteTeachersInitialData: IInstituteTeacherInitialData = {
+  teachers: [],
+  status: Status.LOADING
+}

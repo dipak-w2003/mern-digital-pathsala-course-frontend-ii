@@ -2,20 +2,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   IInitialTeacherDataWithCourse,
   IInstituteTeacherInitialData,
-  initialIInstituteTeacherInitialDataTeacherState,
+  IInstituteTeacherInitialDataTeacher,
+  iInstituteTeachersInitialData,
+
 } from "./instituteTeacherSlice.type";
 import { Status } from "@/lib/types/type";
 import { AppDispatch } from "@/lib/store/store";
 import { API } from "@/lib/http";
 const instituteTeacherSlice = createSlice({
   name: "instituteTeacherSlice",
-  initialState: initialIInstituteTeacherInitialDataTeacherState,
+  initialState: iInstituteTeachersInitialData,
   reducers: {
     setTeacher(
       state: IInstituteTeacherInitialData,
-      action: PayloadAction<IInitialTeacherDataWithCourse>
+      action: PayloadAction<IInstituteTeacherInitialDataTeacher>
     ) {
-      state.teacher = action.payload;
+      state.teachers.push(action.payload)
     },
     setStatus(
       state: IInstituteTeacherInitialData,
