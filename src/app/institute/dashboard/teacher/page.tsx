@@ -1,10 +1,16 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { deleteInsituteTeacherById, fetchInsituteTeacher } from "@/lib/store/institute/teacher/institute-teacher-slice";
+import {
+  deleteInsituteTeacherById,
+  fetchInsituteTeacher,
+} from "@/lib/store/institute/teacher/institute-teacher-slice";
 import { useEffect, useState } from "react";
-import TeacherModal from "./TeacherModal";
+import TeacherModal from "./teacher.modal";
 
 function InstituteTeacher() {
+  const { teacher: instituteTeachers } = useAppSelector(
+    (store) => store.teacher
+  );
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const openModal = () => setIsModalOpen(true);
@@ -12,11 +18,12 @@ function InstituteTeacher() {
   const { teachers } = useAppSelector((store) => store.instituteTeacher);
   const [searchTerm, setSearchTerm] = useState<string>("");
   useEffect(() => {
+    console.log(instituteTeachers);
     dispatch(fetchInsituteTeacher());
   }, []);
 
   const filteredTeacher = teachers.filter((teacher) =>
-    teacher.teacherName?.toLowerCase().includes(searchTerm.toLowerCase()),
+    teacher.teacherName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const deleteTeacher = (id: string) => {

@@ -1,6 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { addCategory } from "@/lib/store/institute/category/categorySlice";
 import { fetchInstituteCourse } from "@/lib/store/institute/course/institute-course-slice";
-import { createInstituteTeacher } from "@/lib/store/institute/teacher/institute-teacher-slice";
+import {
+  createInstituteTeacher,
+  fetchInsituteTeacher,
+} from "@/lib/store/institute/teacher/institute-teacher-slice";
 import { ITeacherPostData } from "@/lib/store/teacher/teacherSlice.type";
 import { Status } from "@/lib/types/type";
 import React, { ChangeEvent, useEffect, useState } from "react";
@@ -10,10 +14,9 @@ interface ICloseModal {
 }
 
 const TeacherModal: React.FC<ICloseModal> = ({ closeModal }) => {
-  const { courses } = useAppSelector((store) => store.course);
-  console.log(courses, "COurse data");
+  const { courses, status } = useAppSelector((store) => store.course);
+  // console.log(courses, "COurse data");
   const dispatch = useAppDispatch();
-  const { status } = useAppSelector((store) => store.category);
   const [teacherData, setTeacherData] = useState<ITeacherPostData>({
     courseId: "",
     teacherEmail: "",
@@ -36,8 +39,10 @@ const TeacherModal: React.FC<ICloseModal> = ({ closeModal }) => {
   };
   const handleTeacherSubmission = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // console.log("teacher form submission data : ", teacherData);
     await dispatch(createInstituteTeacher(teacherData));
     if (status === Status.SUCCESS) {
+      dispatch(fetchInsituteTeacher());
       closeModal();
     }
   };
@@ -118,7 +123,7 @@ const TeacherModal: React.FC<ICloseModal> = ({ closeModal }) => {
               htmlFor="website_url"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300"
             >
-              Teacher Email
+              Teacher Photo
             </label>
             <input
               name="teacherPhoto"
